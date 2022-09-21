@@ -50,7 +50,11 @@ fn spawn_food(windows: ResMut<Windows>, mut commands: Commands, query: Query<&Fo
                 custom_size: Some(Vec2::new(food_size.width, food_size.height)),
                 ..default()
             },
-            transform: Transform::from_xyz(random_x, random_y, 0.0),
+            transform: Transform::from_xyz(
+                (random_x / food_size.width).round() * food_size.width,
+                (random_y / food_size.height).round() * food_size.height,
+                0.0,
+            ),
             ..default()
         })
         .insert(Food)
